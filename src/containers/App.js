@@ -3,6 +3,7 @@ import { Component } from 'react';
 import Header from '../components/Header';
 import CurrencyExchangeForm from '../components/CurrencyExchangeForm';
 import convertAmount from '../api/fetchData';
+import DisplayResult from '../components/DisplayResult';
 
 class App extends Component {
   constructor() {
@@ -22,7 +23,8 @@ class App extends Component {
       prevState.amount !== this.state.amount
     ) {
       convertAmount(this.state.baseCurrency, this.state.convertCurrency, this.state.amount)
-        .then((res) => this.setState({ result: res }));
+        .then((res) => JSON.parse(res))
+        .then((parsedRes) => this.setState({ result: (Math.round(parsedRes.result * 100) / 100).toFixed(2) }));
     }
   }
  
@@ -41,7 +43,7 @@ class App extends Component {
         <Header />
         <CurrencyExchangeForm onSubmit={this.handleSubmit}/>
         <br></br>
-        <p>result: {this.state.result}</p>
+        <DisplayResult result={this.state.result} />
       </div>
     );
   }

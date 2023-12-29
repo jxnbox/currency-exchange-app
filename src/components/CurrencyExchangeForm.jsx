@@ -10,7 +10,6 @@ const CurrencyExchangeForm = ({onSubmit}) => {
                 </select>
                 <br />
                 <p>TO</p>
-                <br />
                 <label htmlFor="select-convert-currency">Convert: </label>
                 <select name="convert-currency" id ="select-convert-currency">
                     <option value="USD">USD</option>

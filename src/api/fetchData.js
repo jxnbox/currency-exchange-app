@@ -1,15 +1,15 @@
-import apikey from "./apikey";
+import apiKey from "./apikey";
 
+const options = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': apiKey,
+        'X-RapidAPI-Host': 'currency-conversion-and-exchange-rates.p.rapidapi.com'
+    }
+};
 
 const convertAmount = async (baseCurrency, convertCurrency, amount) => {
     const url = `https://currency-conversion-and-exchange-rates.p.rapidapi.com/convert?from=${baseCurrency}&to=${convertCurrency}&amount=${amount}`;
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': `${apikey}`,
-            'X-RapidAPI-Host': 'currency-conversion-and-exchange-rates.p.rapidapi.com'
-        }
-    };
 
     try {
         const response = await fetch(url, options);
