@@ -20,4 +20,16 @@ const convertAmount = async (baseCurrency, convertCurrency, amount) => {
     }
 };
 
-export default convertAmount;
+const getSymbols = async () => {
+    const url = "https://currency-conversion-and-exchange-rates.p.rapidapi.com/symbols";
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        return result;
+    } catch (error) {
+        return error;
+    }
+}
+
+export {convertAmount, getSymbols};

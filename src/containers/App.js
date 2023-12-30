@@ -2,7 +2,7 @@ import './App.css';
 import { Component } from 'react';
 import Header from '../components/Header';
 import CurrencyExchangeForm from '../components/CurrencyExchangeForm';
-import convertAmount from '../api/fetchData';
+import {convertAmount} from '../api/fetchData';
 import DisplayResult from '../components/DisplayResult';
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
       baseCurrency : "",
       convertCurrency : "",
       amount : "",
-      result : ""
+      result : "",
     };
   }
 
@@ -25,8 +25,8 @@ class App extends Component {
       convertAmount(this.state.baseCurrency, this.state.convertCurrency, this.state.amount)
         .then((res) => JSON.parse(res))
         .then((parsedRes) => this.setState({ result: (Math.round(parsedRes.result * 100) / 100).toFixed(2) }));
-    }
-  }
+    };
+  };
  
   handleSubmit = (e) => {
     e.preventDefault();
@@ -35,13 +35,13 @@ class App extends Component {
       convertCurrency : e.target[1].value,
       amount : e.target[2].value,
     })
-  }
+  };
 
   render() {
     return (
       <div className="App">
         <Header />
-        <CurrencyExchangeForm onSubmit={this.handleSubmit}/>
+        <CurrencyExchangeForm onSubmit={this.handleSubmit} />
         <br></br>
         <DisplayResult result={this.state.result} />
       </div>
