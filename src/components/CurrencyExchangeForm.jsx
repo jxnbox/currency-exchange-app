@@ -20,6 +20,10 @@ const CurrencyExchangeForm = ({onSubmit}) => {
           };
     }, [currencyNames]);
 
+    if(!currencyNames.length) {
+        return <h2>LOADING</h2>
+    }
+
     return (
         <div>
             <form onSubmit={onSubmit}>

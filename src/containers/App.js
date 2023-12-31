@@ -1,49 +1,24 @@
 import './App.css';
 import { Component } from 'react';
 import Header from '../components/Header';
-import CurrencyExchangeForm from '../components/CurrencyExchangeForm';
-import {convertAmount} from '../api/fetchData';
-import DisplayResult from '../components/DisplayResult';
+import Navbar from '../components/Navbar';
+import { Routes, Route } from 'react-router-dom';
+import CurrencyExchangePage from '../pages/currencyExchangePage';
+import Home from '../pages/Home';
+import LoginPage from '../pages/Login';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      baseCurrency : "",
-      convertCurrency : "",
-      amount : "",
-      result : "",
-    };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.baseCurrency !== this.state.baseCurrency ||
-      prevState.convertCurrency !== this.state.convertCurrency ||
-      prevState.amount !== this.state.amount
-    ) {
-      convertAmount(this.state.baseCurrency, this.state.convertCurrency, this.state.amount)
-        .then((res) => JSON.parse(res))
-        .then((parsedRes) => this.setState({ result: (Math.round(parsedRes.result * 100) / 100).toFixed(2) }));
-    };
-  };
- 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      baseCurrency : e.target[0].value,
-      convertCurrency : e.target[1].value,
-      amount : e.target[2].value,
-    })
-  };
 
   render() {
     return (
       <div className="App">
         <Header />
-        <CurrencyExchangeForm onSubmit={this.handleSubmit} />
-        <br></br>
-        <DisplayResult result={this.state.result} />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/currency-exchange" element={<CurrencyExchangePage />} />
+        </Routes>
       </div>
     );
   }
