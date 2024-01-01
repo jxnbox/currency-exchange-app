@@ -12,8 +12,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <Navbar />
+        <div className='head-container'>
+          <Header />
+          <Navbar />
+        </div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
