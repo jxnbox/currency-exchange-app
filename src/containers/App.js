@@ -6,7 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import CurrencyExchangePage from '../pages/currencyExchangePage';
 import Home from '../pages/Home';
 import LoginPage from '../pages/Login';
-
+import SignUpPage from '../pages/SignUp';
 class App extends Component {
 
   render() {
@@ -19,6 +19,7 @@ class App extends Component {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/currency-exchange" element={<CurrencyExchangePage />} />
         </Routes>
       </div>
