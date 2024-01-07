@@ -1,60 +1,53 @@
-import { Component } from "react";
-import {initializeApp} from 'firebase/app'
+import { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import firebaseConfig from '../firebase/firebase';
+import fbApp from '../firebase/firebase'
 
-const fbApp = initializeApp(firebaseConfig);
-const auth = getAuth();
+const auth = getAuth(fbApp);
 
-class LoginPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email : '',
-            password : '',
+const LoginPage = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+              const result = await signInWithEmailAndPassword(auth, email, password);
+              console.log(result);
+            } catch (error) {
+              console.error('Error signing in:', error.message);
+            }
         }
-    };
+        if (email && password) {
+            getUser();
+        };
+    }, [email, password]);
 
-    handleFormSubmit= (e) => {
+    const handleFormSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            email : e.target[0].value,
-            password : e.target[1].value
-        }, () => {
-            signInWithEmailAndPassword(auth, this.state.email, this.state.password)
-            .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user)
-            })
-            .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log("incorrect")
-            });
-        });
+        const enteredEmail = e.target[0].value;
+        const enteredPassword = e.target[1].value;
+        setEmail(enteredEmail);
+        setPassword(enteredPassword);
         e.target[0].value = "";
         e.target[1].value = "";
     };
 
-
-    render() {
-        return (
+    return (
+        <div>
+            <h2>Login page</h2>
             <div>
-                <h2>Login page</h2>
-                <div>
-                    <form onSubmit={this.handleFormSubmit}>
-                        <label htmlFor="email">email: </label>
-                        <input type="text" name="email"/>
-                        <br />
-                        <label htmlFor="password">password: </label>
-                        <input type="password" name="password"/>
-                        <br />
-                        <button>continue</button>
-                    </form>
-                </div>
+                <form onSubmit={handleFormSubmit}>
+                    <label htmlFor="email">email: </label>
+                    <input type="text" name="email"/>
+                    <br />
+                    <label htmlFor="password">password: </label>
+                    <input type="password" name="password"/>
+                    <br />
+                    <button>continue</button>
+                </form>
             </div>
-        )
-    }
+        </div>
+    );
 }
 
 export default LoginPage;

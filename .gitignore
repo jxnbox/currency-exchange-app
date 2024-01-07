@@ -8,6 +8,7 @@
 #
 apikey.js
 .env
+firebase.js
 
 # testing
 /coverage

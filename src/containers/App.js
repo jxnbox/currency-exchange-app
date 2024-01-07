@@ -9,23 +9,17 @@ import LoginPage from '../pages/Login';
 import SignUpPage from '../pages/SignUp';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      userLoggedIn : "false",
-    }
-  }
 
   render() {
     return (
       <div className="App">
         <div className='head-container'>
           <Header />
-          <Navbar status={this.state.userLoggedIn}/>
+          <Navbar />
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage status={this.state.userLoggedIn}/>} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/currency-exchange" element={<CurrencyExchangePage />} />
         </Routes>
