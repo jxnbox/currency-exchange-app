@@ -4,7 +4,7 @@ import fbApp from '../firebase/firebase'
 
 const auth = getAuth(fbApp);
 
-const LoginPage = () => {
+const LoginPage = ({updateUserState}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -12,7 +12,8 @@ const LoginPage = () => {
         const getUser = async () => {
             try {
               const result = await signInWithEmailAndPassword(auth, email, password);
-              console.log(result);
+              console.log(result)
+              updateUserState(result.user.uid);
             } catch (error) {
               console.error('Error signing in:', error.message);
             }
