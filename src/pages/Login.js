@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import fbApp from '../firebase/firebase'
+import fbApp from '../firebase/firebase';
+import CurrencyExchangePage from "./currencyExchangePage";
 
 const auth = getAuth(fbApp);
 
 const LoginPage = ({updateUserState}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoggedIn, setLoginLoggedIn] = useState(false);
 
     useEffect(() => {
         const getUser = async () => {
             try {
               const result = await signInWithEmailAndPassword(auth, email, password);
-              console.log(result)
               updateUserState(result.user.uid);
+              setLoginLoggedIn(true)
             } catch (error) {
               console.error('Error signing in:', error.message);
             }
@@ -21,7 +23,8 @@ const LoginPage = ({updateUserState}) => {
         if (email && password) {
             getUser();
         };
-    }, [email, password]);
+
+    }, [email, password, isLoggedIn, updateUserState]);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -33,22 +36,26 @@ const LoginPage = ({updateUserState}) => {
         e.target[1].value = "";
     };
 
-    return (
-        <div>
-            <h2>Login page</h2>
+    if (!isLoggedIn) {
+        return (
             <div>
-                <form onSubmit={handleFormSubmit}>
-                    <label htmlFor="email">email: </label>
-                    <input type="text" name="email"/>
-                    <br />
-                    <label htmlFor="password">password: </label>
-                    <input type="password" name="password"/>
-                    <br />
-                    <button>continue</button>
-                </form>
+                <h2>Login page</h2>
+                <div>
+                    <form onSubmit={handleFormSubmit}>
+                        <label htmlFor="email">email: </label>
+                        <input type="text" name="email"/>
+                        <br />
+                        <label htmlFor="password">password: </label>
+                        <input type="password" name="password"/>
+                        <br />
+                        <button>continue</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return <CurrencyExchangePage />
+    }
 }
 
 export default LoginPage;
