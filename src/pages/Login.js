@@ -15,7 +15,7 @@ const LoginPage = ({updateUserState}) => {
             try {
               const result = await signInWithEmailAndPassword(auth, email, password);
               updateUserState(result.user.uid);
-              setLoginLoggedIn(true)
+              setLoginLoggedIn(true);
             } catch (error) {
               console.error('Error signing in:', error.message);
             }
@@ -24,7 +24,7 @@ const LoginPage = ({updateUserState}) => {
             getUser();
         };
 
-    }, [email, password, isLoggedIn, updateUserState]);
+    }, [email, password, updateUserState]);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
