@@ -34,6 +34,9 @@ const LoginPage = ({updateUserState}) => {
         setPassword(enteredPassword);
         e.target[0].value = "";
         e.target[1].value = "";
+        if (isLoggedIn) {
+            window.location.assign("/")
+        }
     };
 
     if (!isLoggedIn) {
