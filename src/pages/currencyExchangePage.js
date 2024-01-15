@@ -38,7 +38,7 @@ class CurrencyExchangePage extends Component {
   
     render() {
       return (
-        <div className="App">
+        <div className='form-and-result-container'>
           <CurrencyExchangeForm onSubmit={this.handleSubmit} />
           <br></br>
           <DisplayResult result={this.state.result} />

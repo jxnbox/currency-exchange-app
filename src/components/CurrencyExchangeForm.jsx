@@ -25,30 +25,30 @@ const CurrencyExchangeForm = ({onSubmit}) => {
     }
 
     return (
-        <div>
-            <form onSubmit={onSubmit}>
-                <label htmlFor="select-base-currency">Base: </label>
-                <select name="base-currency" id ="select-base-currency">
-                    {currencyNames.map((currName, i) => {
-                        return (
-                            <option value={currencyAbbr[i]} key={`${currName}-${i}`}>{currName}</option>
-                        )
-                    })}
-                </select>
-                <br />
-                <p>TO</p>
-                <label htmlFor="select-convert-currency">Convert: </label>
-                <select name="convert-currency" id ="select-convert-currency">
-                    {currencyNames.map((convertCurrName, i) => {
-                        return (
-                            <option value={currencyAbbr[i]} key={`${convertCurrName}-${i}`}>{convertCurrName}</option>
-                        )
-                    })}
-                </select>
-                <br />
-                <label htmlFor="amount">Amount: </label>
-                <input type="number" name="amount" />
-                <button type="submit">convert</button>
+        <div className="currency-form-container">
+            <form onSubmit={onSubmit} className="currency-form">
+                <div className="currency-form-item-container">
+                    <label htmlFor="select-base-currency">Base: </label>
+                    <select name="base-currency" id ="select-base-currency">
+                        {currencyNames.map((currName, i) => {
+                            return (
+                                <option value={currencyAbbr[i]} key={`${currName}-${i}`}>{currName}</option>
+                            )
+                        })}
+                    </select>
+                    <p>TO</p>
+                    <label htmlFor="select-convert-currency">Convert: </label>
+                    <select name="convert-currency" id ="select-convert-currency">
+                        {currencyNames.map((convertCurrName, i) => {
+                            return (
+                                <option value={currencyAbbr[i]} key={`${convertCurrName}-${i}`}>{convertCurrName}</option>
+                            )
+                        })}
+                    </select>
+                    <label htmlFor="amount">Amount: </label>
+                    <input type="number" name="amount" />
+                    <button type="submit">convert</button>
+                </div>
             </form>
         </div>
     )
