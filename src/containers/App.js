@@ -34,8 +34,8 @@ class App extends Component {
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage updateUserState={this.updateUserState}/>} />
-          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage updateUserState={this.updateUserState} auth={auth}/>} />
+          <Route path="/sign-up" element={<SignUpPage auth={auth}/>} />
           <Route path="/currency-exchange" element={<CurrencyExchangePage />} />
         </Routes>
       </div>

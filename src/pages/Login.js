@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import fbApp from '../firebase/firebase';
+import { signInWithEmailAndPassword } from "firebase/auth";
 import CurrencyExchangePage from "./currencyExchangePage";
 
-const auth = getAuth(fbApp);
-
-const LoginPage = ({updateUserState}) => {
+const LoginPage = ({updateUserState, auth}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedIn, setLoginLoggedIn] = useState(false);
@@ -24,7 +21,7 @@ const LoginPage = ({updateUserState}) => {
             getUser();
         };
 
-    }, [email, password, updateUserState]);
+    }, [email, password, updateUserState, auth]);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
