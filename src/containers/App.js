@@ -9,6 +9,7 @@ import LoginPage from '../pages/Login';
 import SignUpPage from '../pages/SignUp';
 import { getAuth } from "firebase/auth";
 import fbApp from '../firebase/firebase';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const auth = getAuth(fbApp);
 
 class App extends Component {

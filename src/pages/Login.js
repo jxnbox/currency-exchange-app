@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import CurrencyExchangePage from "./currencyExchangePage";
-
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 const LoginPage = ({updateUserState, auth}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedIn, setLoginLoggedIn] = useState(false);
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     useEffect(() => {
         const getUser = async () => {
@@ -17,39 +19,41 @@ const LoginPage = ({updateUserState, auth}) => {
               console.error('Error signing in:', error.message);
             }
         }
-        if (email && password) {
+        if (formSubmitted) {
             getUser();
         };
 
-    }, [email, password, updateUserState, auth]);
+    }, [email, password, updateUserState, formSubmitted ,auth]);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const enteredEmail = e.target[0].value;
-        const enteredPassword = e.target[1].value;
-        setEmail(enteredEmail);
-        setPassword(enteredPassword);
+        setFormSubmitted(true)
         e.target[0].value = "";
         e.target[1].value = "";
-        if (isLoggedIn) {
-            window.location.assign("/")
-        }
     };
+
+    const handleOnChangeEmail = (e) => {
+        const enteredEmail = e.target.value;
+        setEmail(enteredEmail);
+    };
+
+    const handleOnChangePassword = (e) => {
+        const enteredPassword = e.target.value;
+        setPassword(enteredPassword);
+    }
 
     if (!isLoggedIn) {
         return (
             <div>
                 <h2>Login page</h2>
                 <div>
-                    <form onSubmit={handleFormSubmit}>
-                        <label htmlFor="email">email: </label>
-                        <input type="text" name="email"/>
-                        <br />
-                        <label htmlFor="password">password: </label>
-                        <input type="password" name="password"/>
-                        <br />
-                        <button>continue</button>
-                    </form>
+                    <Form onSubmit={handleFormSubmit}>
+                        <Form.Label htmlFor="email">email: </Form.Label>
+                        <Form.Control type="text" name="email" onChange={handleOnChangeEmail}/>
+                        <Form.Label htmlFor="password">password: </Form.Label>
+                        <Form.Control type="password" name="password" onChange={handleOnChangePassword}/>
+                        <Button variant="primary" type="submit">continue</Button>
+                    </Form>
                 </div>
             </div>
         );
