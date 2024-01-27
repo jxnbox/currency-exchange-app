@@ -50,19 +50,21 @@ const LoginPage = ({updateUserState, auth}) => {
 
     if (!isLoggedIn) {
         return (
-            <Container>
-                <Stack gap={3}>
-                        <h2>Login page</h2>
-                        <Form onSubmit={handleFormSubmit}>
-                            <Stack gap={2}>
-                                <Form.Label htmlFor="email">email: </Form.Label>
-                                <Form.Control type="text" name="email" onChange={handleOnChangeEmail}/>
-                                <Form.Label htmlFor="password">password: </Form.Label>
-                                <Form.Control type="password" name="password" onChange={handleOnChangePassword}/>
-                            </Stack>
-                            <Button variant="primary" className="login-submit-btn" type="submit">continue</Button>
-                        </Form>
-                </Stack>
+            <Container fluid className="form-container">
+                <Row>
+                    <Stack gap={3}>
+                            <h2>Login page</h2>
+                            <Form onSubmit={handleFormSubmit}>
+                                <Stack gap={2}>
+                                    <Form.Label htmlFor="email">email: </Form.Label>
+                                    <Form.Control type="text" name="email" onChange={handleOnChangeEmail} className="email-login-inputfield" />
+                                    <Form.Label htmlFor="password">password: </Form.Label>
+                                    <Form.Control type="password" name="password" onChange={handleOnChangePassword}/>
+                                </Stack>
+                                <Button variant="primary" className="login-submit-btn" type="submit">continue</Button>
+                            </Form>
+                    </Stack>
+                </Row>
             </Container>
         );
     } else {

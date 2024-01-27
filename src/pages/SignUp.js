@@ -1,5 +1,10 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const SignUpPage = ({auth}) => {
 
@@ -32,28 +37,34 @@ const SignUpPage = ({auth}) => {
     }, [newUserEmail,newUserPassword, auth]);
 
     return (
-        <div>
+        <Container>
             <h2>Sign-up page</h2>
-            <div>
-                <form onSubmit={handleFormSubmit}>
-                    <label htmlFor="f-name">First name: </label>
-                    <input type="text" name="f-name"/>
-                    <label htmlFor="s-name">surname: </label>
-                    <input type="text" name="s-name"/>
+            <Container>
+                <Form onSubmit={handleFormSubmit}>
+                    <Row>
+                        <Col>
+                            <Form.Label htmlFor="f-name">First name: </Form.Label>
+                            <Form.Control type="text" name="f-name"/>
+                        </Col>
+                        <Col>
+                            <Form.Label htmlFor="s-name">surname: </Form.Label>
+                            <Form.Control  type="text" name="s-name"/>
+                        </Col>
+                    </Row>
                     <br />
-                    <label htmlFor="email">email: </label>
-                    <input type="text" name="email"/>
+                    <Form.Label htmlFor="email">email: </Form.Label>
+                    <Form.Control  type="text" name="email"/>
                     <br />
-                    <label htmlFor="password">password: </label>
-                    <input type="password" name="password"/>
+                    <Form.Label htmlFor="password">password: </Form.Label>
+                    <Form.Control  type="password" name="password"/>
                     <br />
                     <p>confirm password: </p>
-                    <input type="password" name="password"/>
+                    <Form.Control  type="password" name="password"/>
                     <br />
-                    <button>continue</button>
-                </form>
-            </div>
-        </div>
+                    <Button>continue</Button>
+                </Form>
+            </Container>
+        </Container>
     );
 };
 
