@@ -13,6 +13,7 @@ const SignUpPage = ({auth}) => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
+        console.log('tick')
         const enteredNewUserEmail = e.target[2].value;
         const enteredNewUserPassword = e.target[3].value;
         setNewUserEmail(enteredNewUserEmail)
@@ -51,17 +52,13 @@ const SignUpPage = ({auth}) => {
                             <Form.Control  type="text" name="s-name"/>
                         </Col>
                     </Row>
-                    <br />
                     <Form.Label htmlFor="email">email: </Form.Label>
                     <Form.Control  type="text" name="email"/>
-                    <br />
                     <Form.Label htmlFor="password">password: </Form.Label>
                     <Form.Control  type="password" name="password"/>
-                    <br />
                     <p>confirm password: </p>
                     <Form.Control  type="password" name="password"/>
-                    <br />
-                    <Button>continue</Button>
+                    <Button type="submit">continue</Button>
                 </Form>
             </Container>
         </Container>
