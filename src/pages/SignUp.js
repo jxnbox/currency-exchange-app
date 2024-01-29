@@ -13,7 +13,6 @@ const SignUpPage = ({auth}) => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log('tick')
         const enteredNewUserEmail = e.target[2].value;
         const enteredNewUserPassword = e.target[3].value;
         setNewUserEmail(enteredNewUserEmail)
