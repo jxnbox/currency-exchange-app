@@ -1,7 +1,7 @@
 import './App.css';
 import { Component } from 'react';
 import Header from '../components/Header';
-import Navbar from '../components/Navbar';
+import NavbarComponent from '../components/NavbarComponent';
 import { Routes, Route} from 'react-router-dom';
 import CurrencyExchangePage from '../pages/currencyExchangePage';
 import Home from '../pages/Home';
@@ -29,10 +29,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className='head-container'>
-          <Header />
-          <Navbar user={this.state.user}/>
-        </div>
+        <NavbarComponent user={this.state.user}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage updateUserState={this.updateUserState} auth={auth}/>} />
