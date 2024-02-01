@@ -3,10 +3,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import CurrencyExchangePage from "./currencyExchangePage";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
+import Card from 'react-bootstrap/Card';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 
 const LoginPage = ({updateUserState, auth}) => {
@@ -50,22 +49,24 @@ const LoginPage = ({updateUserState, auth}) => {
 
     if (!isLoggedIn) {
         return (
-            <Container fluid className="form-container">
-                <Row>
-                    <Stack gap={3}>
-                            <h2>Login page</h2>
-                            <Form onSubmit={handleFormSubmit}>
-                                <Stack gap={2}>
-                                    <Form.Label htmlFor="email">email: </Form.Label>
-                                    <Form.Control type="text" name="email" onChange={handleOnChangeEmail} className="email-login-inputfield" />
-                                    <Form.Label htmlFor="password">password: </Form.Label>
-                                    <Form.Control type="password" name="password" onChange={handleOnChangePassword}/>
-                                </Stack>
-                                <Button variant="primary" className="login-submit-btn" type="submit">continue</Button>
-                            </Form>
-                    </Stack>
-                </Row>
-            </Container>
+            <div className="form-container">
+                <Card border="primary" style={{width: '20rem'}}>
+                    <Card.Header>Login page</Card.Header>
+                    <Form onSubmit={handleFormSubmit}>
+                        <Card.Body>
+                            <Stack gap={4}>
+                                <FloatingLabel htmlFor="email" label="Email Address">
+                                    <Form.Control type="text" name="email" onChange={handleOnChangeEmail} className="email-login-inputfield" placeholder="Email Address" />
+                                </FloatingLabel>
+                                <FloatingLabel htmlFor="password" label="password">
+                                    <Form.Control type="password" name="password" onChange={handleOnChangePassword} placeholder=""/>
+                                </FloatingLabel>
+                            </Stack>
+                            <Button variant="primary" className="login-submit-btn" type="submit">continue</Button>
+                        </Card.Body>
+                    </Form>
+                </Card>
+            </div>
         );
     } else {
         return <CurrencyExchangePage />
