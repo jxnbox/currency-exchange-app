@@ -50,7 +50,7 @@ const LoginPage = ({updateUserState, auth}) => {
     if (!isLoggedIn) {
         return (
             <div className="form-container">
-                <Card border="primary" style={{width: '20rem'}}>
+                <Card border="primary" style={{width: '30rem'}}>
                     <Card.Header>Login page</Card.Header>
                     <Form onSubmit={handleFormSubmit}>
                         <Card.Body>
